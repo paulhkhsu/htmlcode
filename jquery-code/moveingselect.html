@@ -1,0 +1,90 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!--http://www.ezzylearning.com/tutorial.aspx?tid=6942119 -->
+<html>
+<head>
+<title>Test</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#MoveRight,#MoveLeft").click(function(event) {
+			var id = $(event.target).attr("id");
+			var from = id == "MoveRight" ? "#SelectLeft" : "#SelectRight";
+			var to = id == "MoveRight" ? "#SelectRight" : "#SelectLeft";
+
+			move(from, to, ':selected');
+		});
+		$("#MoveRightAll,#MoveLeftAll").click(function(event) {
+
+			var id = $(event.target).attr("id");
+			var from = id == "MoveRightAll" ? "#SelectLeft" : "#SelectRight";
+			var to = id == "MoveRightAll" ? "#SelectRight" : "#SelectLeft";
+			move(from, to, 'option');
+
+		});
+
+		$('#SelectLeft').dblclick(function() {
+
+			move('#SelectLeft', '#SelectRight', ':selected');
+		});
+
+		$('#SelectRight').dblclick(function() {
+			move('#SelectRight', '#SelectLeft', ':selected');
+		});
+
+	});
+
+	function move(from, to, options) {
+
+		var selectedItems = $(from + ' ' + options).toArray();
+		$(from + ' option').prop("selected", false);
+		//$(to + ' option').prop("selected", false);
+		$(to).append(selectedItems);
+		selectedItems.remove;
+	};
+</script>
+</head>
+<body>
+	<div style="width: 50%">
+		<form method="get">
+			<div style="float: left">
+				<select id="SelectLeft" multiple="multiple" style="width: 130px">
+					<option value="1">Australia</option>
+					<option value="2">New Zealand</option>
+					<option value="3">Canada</option>
+					<option value="4">USA</option>
+					<option value="5">France</option>
+					<option value="6">China</option>
+				</select>
+			</div>
+			<div style="float: left">
+			<table>
+			<tr>
+			<td >
+				<input id="MoveRightAll" type="button" value=" >> " /> 
+				</td>
+				<td  style="text-align : right">
+				<input
+					id="MoveLeftAll" type="button" value=" << " /> 
+					</td>
+					</tr>
+					<tr><td></td></tr>
+					<tr>
+					<td>
+				<input id="MoveRight" type="button" value=" > " /> </td>
+				<td style="text-align : right"> <input
+					id="MoveLeft" type="button" value=" < " />
+					</td>
+					</tr>
+					</table>
+			</div>
+			<div style="float: left">
+				<select id="SelectRight" multiple="multiple" style="width: 130px">
+			</div>
+			</select>
+		</form>
+	</div>
+</body>
+</html>
